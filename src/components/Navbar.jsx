@@ -20,7 +20,7 @@ const Navbar = () => {
             <Link href={"/student"}>Student</Link>
           </h2>
           <h2 className="text-2xl font-semibold gap-2 items-center px-3">
-            <Link href={"/Productpage"}>Product</Link>
+            <Link href={"/product"}>Product</Link>
           </h2>
         </div>
       </nav>

@@ -1,5 +1,5 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa"; // Import search icon
 
 const Productpage = () => {
@@ -9,21 +9,14 @@ const Productpage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=10")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        setFilteredProducts(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-        setError(error.message);
-      });
+    const fetchProducts = async ()=>{ 
+      const product = await fetch("/api/product")
+      const data = await product.json()
+      setProducts(data);
+      setFilteredProducts(data);
+      console.log(data)
+     }
+     fetchProducts()
   }, []);
 
   const handleSearchChange = (e) => {
@@ -105,11 +98,11 @@ const Productpage = () => {
                 <h3 className="text-xl font-semibold">{product.title}</h3>
                 <p className="text-gray-600">${product.price}</p>
                 <div className="w-full flex justify-center gap-3">
-                  {/* <Link hrefLang="{`/product/${product.id}`}"> */}
+                  <Link href={`/${product.id}`}>
                     <button className="w-full mt-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
                       View More
                     </button>
-                  {/* </Link> */}
+                  </Link>
                 </div>
               </div>
             ))
